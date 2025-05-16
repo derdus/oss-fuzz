@@ -140,7 +140,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
   fz_try(ctx) {
     fz_register_document_handlers(ctx);
     stream = fz_open_memory(ctx, data, size);
-    doc = fz_open_document_with_stream(ctx, "pdf", stream);
+    doc = fz_open_document_with_stream(ctx, "svg", stream);
 
     for (int i = 0; i < fz_count_pages(ctx, doc); i++) {
       pix = fz_new_pixmap_from_page_number(ctx, doc, i, fz_identity, fz_device_rgb(ctx), 0);
