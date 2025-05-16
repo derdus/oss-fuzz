@@ -17,10 +17,10 @@
 FROM gcr.io/oss-fuzz-base/base-builder
 RUN apt-get update && apt-get install -y make libtool pkg-config
 RUN git clone --recursive --depth 1 git://git.ghostscript.com/mupdf.git mupdf
-RUN git clone --depth 1 https://github.com/mozilla/pdf.js pdf.js && \
-    zip -q $SRC/pdf_fuzzer_seed_corpus.zip pdf.js/test/pdfs/*.pdf && \
-    rm -rf pdf.js
-ADD https://raw.githubusercontent.com/rc0r/afl-fuzz/master/dictionaries/pdf.dict $SRC/pdf_fuzzer.dict
+RUN git clone --depth 1 https://github.com/derdus/resvg-test-suite.git resvg-test-suite && \
+    zip -q $SRC/svg_fuzzer_seed_corpus.zip resvg-test-suite/svg_files/*.svg && \
+    rm -rf resvg-test-suite
+ADD https://raw.githubusercontent.com/AFLplusplus/AFLplusplus/refs/heads/stable/dictionaries/svg.dict $SRC/svg_fuzzer.dict
 WORKDIR mupdf
 COPY *.cc $SRC/
 COPY build.sh *.options $SRC/
